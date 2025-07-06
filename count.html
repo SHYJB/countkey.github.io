@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>按键计数器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+        }
+        #counter {
+            font-size: 48px;
+            margin: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>按键计数器</h1>
+    <div id="counter">0</div>
+    <button onclick="resetCounter()">重置计数器</button>
+
+    <script>
+        // 初始化计数器
+        let count = parseInt(localStorage.getItem('keyPressCount')) || 0;
+        const counterDisplay = document.getElementById('counter');
+
+        function updateDisplay() {
+            counterDisplay.textContent = count;
+        }
+
+        // 监听键盘事件
+        document.addEventListener('keydown', function(event) {
+            count++;
+            updateDisplay();
+            localStorage.setItem('keyPressCount', count);
+        });
+
+        // 重置函数
+        function resetCounter() {
+            count = 0;
+            updateDisplay();
+            localStorage.setItem('keyPressCount', count);
+        }
+
+        // 页面加载时更新显示
+        updateDisplay();
+    </script>
+
+</body>
+</html>
